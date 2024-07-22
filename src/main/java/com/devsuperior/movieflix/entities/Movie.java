@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.devsuperior.movieflix.projections.IdProjection;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_movie")
-public class Movie {
+public class Movie implements IdProjection<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,10 +53,10 @@ public class Movie {
         this.genre = genre;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -63,7 +64,6 @@ public class Movie {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -71,7 +71,6 @@ public class Movie {
     public String getSubTitle() {
         return subTitle;
     }
-
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
     }
@@ -79,7 +78,6 @@ public class Movie {
     public Integer getYear() {
         return year;
     }
-
     public void setYear(Integer year) {
         this.year = year;
     }
@@ -87,7 +85,6 @@ public class Movie {
     public String getImgUrl() {
         return imgUrl;
     }
-
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
@@ -95,7 +92,6 @@ public class Movie {
     public String getSynopsis() {
         return synopsis;
     }
-
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
@@ -103,7 +99,6 @@ public class Movie {
     public Genre getGenre() {
         return genre;
     }
-
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
