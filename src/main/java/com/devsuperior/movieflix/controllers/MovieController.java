@@ -18,6 +18,14 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_VISITOR','ROLE_MEMBER')")
+    @GetMapping
+    public ResponseEntity<Page<MovieDetailsDTO>> findAllPaged(
+            @RequestParam(value = "genreId",defaultValue = "0") String genreId,
+            Pageable pageable){
+        Page<MovieDetailsDTO> list = movieService.findAllPaged(genreId, pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_VISITOR','ROLE_MEMBER')")
     @GetMapping("/{id}")

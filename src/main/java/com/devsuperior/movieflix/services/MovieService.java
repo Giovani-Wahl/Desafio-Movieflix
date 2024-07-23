@@ -4,6 +4,7 @@ import com.devsuperior.movieflix.dto.MovieCardDTO;
 import com.devsuperior.movieflix.dto.MovieDetailsDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.projections.MovieCardProjection;
+import com.devsuperior.movieflix.projections.MovieDetailsProjection;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import com.devsuperior.movieflix.util.Utils;
@@ -27,16 +28,16 @@ public class MovieService {
     }
 
     @Transactional(readOnly = true)
-    public Page<MovieCardDTO> findAllPaged(String genreId,Pageable pageable){
+    public Page<MovieDetailsDTO> findAllPaged(String genreId,Pageable pageable){
         List<Long> genreIds = new ArrayList<>();
         if (!"0".equals(genreId)){
             genreIds = Arrays.stream(genreId.split(",")).map(Long::parseLong).toList();
         }
-        Page<MovieCardProjection> page = movieRepository.searchMovies(genreIds,pageable);
-        List<Long> movieIds = page.map(MovieCardProjection::getId).toList();
+        Page<MovieDetailsProjection> page = movieRepository.searchMovies(genreIds,pageable);
+        List<Long> movieIds = page.map(MovieDetailsProjection::getId).toList();
         List<Movie> entities = movieRepository.searchProductsWithCategories(movieIds);
         entities = (List<Movie>) Utils.replace(page.getContent(),entities);
-        List<MovieCardDTO> dtos = entities.stream().map(MovieCardDTO::new).toList();
+        List<MovieDetailsDTO> dtos = entities.stream().map(MovieDetailsDTO::new).toList();
         return new PageImpl<>(dtos,page.getPageable(),page.getTotalElements());
     }
 
