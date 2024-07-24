@@ -30,9 +30,7 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Review(){
-
-    }
+    public Review(){}
 
     public Review(Long id, String text, Movie movie, User user) {
         this.id = id;
@@ -44,7 +42,6 @@ public class Review {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,7 +49,6 @@ public class Review {
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
@@ -60,7 +56,6 @@ public class Review {
     public Movie getMovie() {
         return movie;
     }
-
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
@@ -68,7 +63,6 @@ public class Review {
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
